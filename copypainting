@@ -1,1 +1,90 @@
 #핸드폰 바탕화면 그리기
+import turtle as tr
+import random
+
+tr.clearscreen()
+
+def phone(size):
+    # 사각형그리기
+    tr.up()
+    tr.goto(-250,-250)
+    tr.down()
+    tr.pencolor("black")
+    tr.fillcolor("gold")
+    tr.begin_fill()
+    tr.forward(size)
+    tr.setheading(90)
+    tr.forward(size*1.1)
+    tr.setheading(180)
+    tr.forward(size)
+    tr.setheading(270)
+    tr.forward(size*1.1)
+    tr.end_fill()
+    
+    #가운데 카메라
+    tr.up()
+    tr.goto(0,270)
+    tr.shape('circle')
+    tr.stamp()
+    tr.shape('classic')
+
+    #시간&날짜표시
+    tr.up()
+    tr.goto(-70, 200)
+    tr.write('10:00',font=('consolas',40))
+    tr.goto(-45, 170)
+    tr.write('11월 15일 수요일',font=('consolas',10))
+
+#바탕화면 나무
+def tree(length):
+    tr.color("brown")
+    colorlist = ["red","yellow","darkgreen","greenyellow", "orange"]
+    tr.pensize(3)
+    angle = random.randint(20, 30)
+    random_color = random.choice(colorlist)
+    
+    #나뭇가지에 잎파리 넣기
+    if length < 30:
+        tr.color(random_color)
+        tr.shapesize(1.5)
+        tr.stamp()
+        tr.color("brown")
+    
+    #나뭇가지 길이 조정
+    if length > 8:
+        tr.forward(length)
+        tr.left(angle)
+        tree(length * 0.7)
+        tr.right(angle * 2)
+        tree(length * 0.7)
+        tr.left(angle)
+        tr.backward(length)
+
+#흙
+def soil(size):
+    tr.up()
+    tr.goto(-250,-250)
+    tr.setheading(0)
+    tr.down()
+    tr.pensize(0.5)
+    tr.pencolor("black")
+    tr.fillcolor("brown")
+    tr.begin_fill()
+    tr.forward(size)
+    tr.setheading(90)
+    tr.forward(size*0.05)
+    tr.setheading(180)
+    tr.forward(size)
+    tr.setheading(270)
+    tr.forward(size*0.05)
+    tr.end_fill()
+
+phone(500)
+tr.goto(0,-250)
+tr.setheading(90)
+tr.down()
+tree(120)
+tr.up()
+soil(500)
+tr.up()
+tr.done()
